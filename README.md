@@ -46,7 +46,7 @@ Scraped url.
 
 #### puppeteerArgs
 
-Type: `object`
+Type: `array`
 
 Options to set on the Chrome browser.
 

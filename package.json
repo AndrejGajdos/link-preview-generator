@@ -1,6 +1,6 @@
 {
   "name": "link-preview-generator",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Get preview data (a title, description, image, domain name) from a url. Library uses puppeteer headless browser to scrape the web site.",
   "main": "index.js",
   "scripts": {
