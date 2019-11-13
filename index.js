@@ -3,11 +3,15 @@ const puppeteer = require("puppeteer-extra");
 const pluginStealth = require("puppeteer-extra-plugin-stealth");
 const util = require("util");
 const request = util.promisify(require("request"));
+const getUrls = require("get-urls");
 
 const urlImageIsAccessible = async url => {
-  const urlResponse = await request(url);
-  const contentType = urlResponse.headers["content-type"];
-  return new RegExp("image/*").test(contentType);
+  const correctedUrls = getUrls(url);
+  if (correctedUrls.size !== 0) {
+    const urlResponse = await request(correctedUrls.values().next().value);
+    const contentType = urlResponse.headers["content-type"];
+    return new RegExp("image/*").test(contentType);
+  }
 };
 
 const getImg = async (page, uri) => {
