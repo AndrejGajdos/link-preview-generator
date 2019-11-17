@@ -2,6 +2,8 @@
 
 > Get preview data (a title, description, image, domain name) from a url. Library uses puppeteer headless browser to scrape the web site.
 
+[BLOG POST](https://andrejgajdos.com/how-to-create-a-link-preview/) and [DEMO](https://link-preview-generator.herokuapp.com/)
+
 ## Install
 
 ```
@@ -55,6 +57,10 @@ Options to set on the Chrome browser.
 Type: `string`
 
 Specific user agent to use.
+
+## Troubleshooting
+
+If you need to deploy this library (Puppeteer) on Heroku, follow [these steps](https://stackoverflow.com/a/55090914/968379).
 
 ## License
 
