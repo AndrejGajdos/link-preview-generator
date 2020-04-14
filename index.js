@@ -5,7 +5,7 @@ const util = require("util");
 const request = util.promisify(require("request"));
 const getUrls = require("get-urls");
 
-const urlImageIsAccessible = async url => {
+const urlImageIsAccessible = async (url) => {
   const correctedUrls = getUrls(url);
   if (correctedUrls.size !== 0) {
     const urlResponse = await request(correctedUrls.values().next().value);
@@ -43,7 +43,7 @@ const getImg = async (page, uri) => {
 
     let imgs = Array.from(document.getElementsByTagName("img"));
     if (imgs.length > 0) {
-      imgs = imgs.filter(img => {
+      imgs = imgs.filter((img) => {
         let addImg = true;
         if (img.naturalWidth > img.naturalHeight) {
           if (img.naturalWidth / img.naturalHeight > 3) {
@@ -59,19 +59,21 @@ const getImg = async (page, uri) => {
         }
         return addImg;
       });
-      imgs.forEach(img =>
-        img.src.indexOf("//") === -1
-          ? (img.src = `${new URL(uri).origin}/${src}`)
-          : img.src
-      );
-      return imgs[0].src;
+      if (imgs.length > 0) {
+        imgs.forEach((img) =>
+          img.src.indexOf("//") === -1
+            ? (img.src = `${new URL(uri).origin}/${src}`)
+            : img.src
+        );
+        return imgs[0].src;
+      }
     }
     return null;
   });
   return img;
 };
 
-const getTitle = async page => {
+const getTitle = async (page) => {
   const title = await page.evaluate(() => {
     const ogTitle = document.querySelector('meta[property="og:title"]');
     if (ogTitle != null && ogTitle.content.length > 0) {
@@ -98,7 +100,7 @@ const getTitle = async page => {
   return title;
 };
 
-const getDescription = async page => {
+const getDescription = async (page) => {
   const description = await page.evaluate(() => {
     const ogDescription = document.querySelector(
       'meta[property="og:description"]'
@@ -158,7 +160,7 @@ module.exports = async (
   puppeteer.use(pluginStealth());
   const browser = await puppeteer.launch({
     headless: true,
-    args: [...puppeteerArgs]
+    args: [...puppeteerArgs],
   });
   const page = await browser.newPage();
   page.setUserAgent(puppeteerAgent);
