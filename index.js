@@ -91,7 +91,7 @@ const getTitle = async (page) => {
     if (h1 != null && h1.length > 0) {
       return h1;
     }
-    const h2 = document.querySelector("h1").innerHTML;
+    const h2 = document.querySelector("h2").innerHTML;
     if (h2 != null && h2.length > 0) {
       return h2;
     }
