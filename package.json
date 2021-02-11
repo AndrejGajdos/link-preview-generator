@@ -34,7 +34,7 @@
   },
   "homepage": "https://github.com/AndrejGajdos/link-preview-generator#readme",
   "dependencies": {
-    "get-urls": "^9.2.0",
+    "get-urls": "^10.0.0",
     "puppeteer": "^2.0.0",
     "puppeteer-extra": "^2.1.3",
     "puppeteer-extra-plugin-stealth": "^2.2.2",
