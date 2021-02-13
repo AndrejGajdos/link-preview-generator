@@ -1,5 +1,9 @@
 # link-preview-generator
 
+![NPM Downloads](https://img.shields.io/npm/dw/link-preview-generator)
+![NPM License](https://img.shields.io/npm/l/link-preview-generator)
+[![Twitter](https://img.shields.io/twitter/follow/Andrej_Gajdos.svg?style=social&label=@Andrej_Gajdos)](https://twitter.com/Andrej_Gajdos)
+
 > Get preview data (a title, description, image, domain name) from a url. Library uses puppeteer headless browser to scrape the web site.
 
 [BLOG POST](https://andrejgajdos.com/how-to-create-a-link-preview/) and [DEMO](https://link-preview-generator.herokuapp.com/)
