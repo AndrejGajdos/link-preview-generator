@@ -87,11 +87,13 @@ const getTitle = async (page) => {
     if (docTitle != null && docTitle.length > 0) {
       return docTitle;
     }
-    const h1 = document.querySelector("h1").innerHTML;
+    const h1El = document.querySelector("h1");
+    const h1 = h1El ? h1El.innerHTML : null;
     if (h1 != null && h1.length > 0) {
       return h1;
     }
-    const h2 = document.querySelector("h2").innerHTML;
+    const h2El = document.querySelector("h2");
+    const h2 = h2El ? h2El.innerHTML : null;
     if (h2 != null && h2.length > 0) {
       return h2;
     }
