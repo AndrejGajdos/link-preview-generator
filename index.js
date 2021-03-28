@@ -4,9 +4,13 @@ const pluginStealth = require("puppeteer-extra-plugin-stealth");
 const util = require("util");
 const request = util.promisify(require("request"));
 const getUrls = require("get-urls");
+const isBase64 = require("is-base64");
 
 const urlImageIsAccessible = async (url) => {
   const correctedUrls = getUrls(url);
+  if (isBase64(url, { allowMime: true })) {
+    return true;
+  }
   if (correctedUrls.size !== 0) {
     const urlResponse = await request(correctedUrls.values().next().value);
     const contentType = urlResponse.headers["content-type"];
