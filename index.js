@@ -175,7 +175,7 @@ module.exports = async (
   }
 
   const browser = await puppeteer.launch(params);
-  const page = await browser.newPage(params);
+  const page = await browser.newPage();
   page.setUserAgent(puppeteerAgent);
 
   await page.goto(uri);
