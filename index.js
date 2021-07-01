@@ -161,13 +161,20 @@ const getDomainName = async (page, uri) => {
 module.exports = async (
   uri,
   puppeteerArgs = [],
-  puppeteerAgent = "facebookexternalhit/1.1 (+http://www.facebook.com/externalhit_uatext.php)"
+  puppeteerAgent = "facebookexternalhit/1.1 (+http://www.facebook.com/externalhit_uatext.php)",
+  executablePath
 ) => {
   puppeteer.use(pluginStealth());
-  const browser = await puppeteer.launch({
+
+  const params = {
     headless: true,
     args: [...puppeteerArgs],
-  });
+  };
+  if (executablePath) {
+    params["executablePath"] = executablePath;
+  }
+
+  const browser = await puppeteer.launch(params);
   const page = await browser.newPage();
   page.setUserAgent(puppeteerAgent);
 
