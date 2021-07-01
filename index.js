@@ -66,7 +66,7 @@ const getImg = async (page, uri) => {
       if (imgs.length > 0) {
         imgs.forEach((img) =>
           img.src.indexOf("//") === -1
-            ? (img.src = `${new URL(uri).origin}/${src}`)
+            ? (img.src = `${new URL(uri).origin}/${img.src}`)
             : img.src
         );
         return imgs[0].src;
@@ -124,7 +124,7 @@ const getDescription = async (page) => {
     if (metaDescription != null && metaDescription.content.length > 0) {
       return metaDescription.content;
     }
-    paragraphs = document.querySelectorAll("p");
+    let paragraphs = document.querySelectorAll("p");
     let fstVisibleParagraph = null;
     for (let i = 0; i < paragraphs.length; i++) {
       if (
