@@ -63,8 +63,20 @@ Type: `string`
 Specific user agent to use.
 
 ## Troubleshooting
-
 If you need to deploy this library (Puppeteer) on Heroku, follow [these steps](https://stackoverflow.com/a/55090914/968379).
+
+If you want to run this library from within a Docker container:
+1. pass the following puppeteer arguments as second argument
+```json
+// Required for Docker version of Puppeteer
+'--no-sandbox',
+'--disable-setuid-sandbox',
+// This will write shared memory files into /tmp instead of /dev/shm,
+// because Docker’s default for /dev/shm is 64MB
+'--disable-dev-shm-usage'
+```
+2. make sure your Docker image has all needed dependencies for headless chrome or just go straight away with [buildkite/puppeteer](https://hub.docker.com/r/buildkite/puppeteer/dockerfile)
+3. done
 
 ## License
 
