@@ -177,6 +177,21 @@ module.exports = async (
   const browser = await puppeteer.launch(params);
   const page = await browser.newPage();
   page.setUserAgent(puppeteerAgent);
+  await page.setRequestInterception(true);
+
+  page.on('request', req => {
+    switch (req.resourceType()) {
+      case 'stylesheet':
+      case 'font':
+      case 'beacon':
+      case 'media':
+      case 'script':
+        req.abort();
+        break;
+      default:
+        req.continue();
+    }
+  });
 
   await page.goto(uri);
   await page.exposeFunction("request", request);
