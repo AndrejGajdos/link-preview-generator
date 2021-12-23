@@ -185,7 +185,9 @@ module.exports = async (
       case 'font':
       case 'beacon':
       case 'media':
-      case 'script':
+      case 'main_frame':
+      case 'websocket':
+      case 'sub_frame':
         req.abort();
         break;
       default:
