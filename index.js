@@ -158,6 +158,60 @@ const getDomainName = async (page, uri) => {
     : new URL(uri).hostname.replace("www.", "");
 };
 
+const getFavicon = async (page, uri) => {
+  const noLinkIcon = `${new URL(uri).origin}/favicon.ico`;
+  if (await urlImageIsAccessible(noLinkIcon)) {
+    return noLinkIcon;
+  }
+
+  const favicon = await page.evaluate(async () => {
+    const icon16Sizes = document.querySelector('link[rel=icon][sizes="16x16"]');
+    if (
+      icon16Sizes &&
+      icon16Sizes.href.length > 0 &&
+      (await urlImageIsAccessible(icon16Sizes.href))
+    ) {
+      return icon16Sizes.href;
+    }
+
+    const shortcutIcon = document.querySelector('link[rel="shortcut icon"]');
+    if (
+      shortcutIcon &&
+      shortcutIcon.href.length > 0 &&
+      (await urlImageIsAccessible(shortcutIcon.href))
+    ) {
+      return shortcutIcon.href;
+    }
+
+    const icons = document.querySelectorAll("link[rel=icon]");
+    for (let i = 0; i < icons.length; i++) {
+      if (
+        icons[i] &&
+        icons[i].href.length > 0 &&
+        (await urlImageIsAccessible(icons[i].href))
+      ) {
+        return icons[i].href;
+      }
+    }
+
+    const appleTouchIcons = document.querySelectorAll('link[rel="apple-touch-icon"],link[rel="apple-touch-icon-precomposed"]');
+    for (let i = 0; i < appleTouchIcons.length; i ++) {
+      if (
+        appleTouchIcons[i] &&
+        appleTouchIcons[i].href.length > 0 &&
+        (await urlImageIsAccessible(appleTouchIcons[i].href))
+      ) {
+        return appleTouchIcons[i].href;
+      }
+    }
+
+    return null;
+  })
+
+  return favicon;
+}
+
+
 module.exports = async (
   uri,
   puppeteerArgs = [],
@@ -187,6 +241,7 @@ module.exports = async (
   obj.description = await getDescription(page);
   obj.domain = await getDomainName(page, uri);
   obj.img = await getImg(page, uri);
+  obj.favicon = await getFavicon(page, uri);
 
   await browser.close();
   return obj;
