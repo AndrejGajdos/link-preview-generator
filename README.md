@@ -31,7 +31,8 @@ console.log(previewData);
     'improve your style and make this basic your own. ' +
     'Sessio...',
   domain: 'youtube.com',
-  img: 'https://i.ytimg.com/vi/8mqqY2Ji7_g/hqdefault.jpg'
+  img: 'https://i.ytimg.com/vi/8mqqY2Ji7_g/hqdefault.jpg',
+  favicon: 'https://www.youtube.com/s/desktop/d3411c39/img/favicon.ico'
 }
 */
 ```

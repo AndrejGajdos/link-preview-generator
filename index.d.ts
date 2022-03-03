@@ -12,4 +12,5 @@ declare interface LinkPreviewResult {
     description: string;
     domain: string;
     img: string;
+    favicon: string;
 }
