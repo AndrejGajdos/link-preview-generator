@@ -1,7 +1,7 @@
 {
   "name": "link-preview-generator",
-  "version": "1.0.7",
-  "description": "Get preview data (a title, description, image, domain name) from a url. Library uses puppeteer headless browser to scrape the web site.",
+  "version": "1.1.0",
+  "description": "Get preview data (a title, description, image, domain name, favicon) from a url. Library uses puppeteer headless browser to scrape the web site.",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
